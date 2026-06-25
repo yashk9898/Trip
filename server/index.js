@@ -74,6 +74,9 @@ if (process.env.NODE_ENV !== 'test') {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ── Health Check ──────────────────────────────────────────────────────────────
+app.get('/', (req, res) => res.send('TripSmart API is running'));
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
