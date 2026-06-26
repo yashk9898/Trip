@@ -106,6 +106,12 @@ app.use('/api/upload', uploadRoutes);
 app.use('/api/itinerary', itineraryRoutes);
 app.use('/api/share', shareRoutes);
 
+// ── Fallback Routes (Handles cases where reverse proxy strips /api) ───────────
+app.use('/auth', authRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/itinerary', itineraryRoutes);
+app.use('/share', shareRoutes);
+
 // ── 404 Handler ───────────────────────────────────────────────────────────────
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
