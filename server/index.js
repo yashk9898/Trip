@@ -23,6 +23,8 @@ const app = express();
 // ── Connect Database ──────────────────────────────────────────────────────────
 connectDB();
 
+app.set('trust proxy', 1);
+
 // ── Security Middleware ───────────────────────────────────────────────────────
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
@@ -33,7 +35,7 @@ app.use(cors({
     // allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    const allowedOrigins = ['http://localhost:5173', 'http://localhost:5000'];
+    const allowedOrigins = ['http://localhost:5173', 'http://localhost:5000','https://trip-eight-kappa.vercel.app/'];
     if (process.env.CLIENT_URL) allowedOrigins.push(process.env.CLIENT_URL);
     
     if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith('.vercel.app')) {
